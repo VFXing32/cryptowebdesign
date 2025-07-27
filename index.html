@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Web3 Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        .tokenomics-chart {
+            width: 100%;
+            height: 300px;
+            position: relative;
+        }
+        .tokenomics-slice {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            clip: rect(0px, 300px, 300px, 150px);
+            transform: rotate(0deg);
+        }
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body class="gradient-bg text-white font-sans">
+    <!-- Header/Navbar -->
+    <nav class="bg-black bg-opacity-30 backdrop-filter backdrop-blur-lg py-4 px-6 fixed w-full z-50">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center">
+                    <span class="font-bold text-xl">A</span>
+                </div>
+                <span class="text-xl font-bold">Crypto Web3</span>
+            </div>
+            <div class="hidden md:flex space-x-8">
+                <a href="#about" class="hover:text-purple-400 transition">About</a>
+                <a href="#features" class="hover:text-purple-400 transition">Features</a>
+                <a href="#games" class="hover:text-purple-400 transition">Games</a>
+                <a href="#tokenomics" class="hover:text-purple-400 transition">Tokenomics</a>
+            </div>
+            <a href="#" class="bg-purple-600 hover:bg-purple-700 px-6 py-2 rounded-full font-medium transition">
+                Start Journey
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-20 px-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-12 md:mb-0">
+                <div class="flex space-x-2 mb-6">
+                    <span class="px-3 py-1 bg-purple-900 bg-opacity-50 rounded-full text-sm">PRE SALE IS LIVE</span>
+                    <span class="px-3 py-1 bg-yellow-600 bg-opacity-50 rounded-full text-sm flex items-center">
+                        <i class="fas fa-bolt mr-1"></i> Polygon Network
+                    </span>
+                </div>
+                <h1 class="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+                    Revolutionizing <span class="text-purple-400">Play-to-Earn</span> Gaming
+                </h1>
+                <p class="text-xl text-gray-300 mb-8">
+                    Join the future of blockchain gaming with our revolutionary Play-to-Earn ecosystem powered by cutting-edge technology.
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="#" class="bg-purple-600 hover:bg-purple-700 px-8 py-4 rounded-full font-medium text-lg transition text-center">
+                        Start Earning Now
+                    </a>
+                    <a href="#about" class="border border-purple-400 hover:bg-purple-900 hover:bg-opacity-30 px-8 py-4 rounded-full font-medium text-lg transition text-center">
+                        Learn More
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 relative">
+                <div class="grid grid-cols-3 gap-4 max-w-md mx-auto">
+                    <div class="bg-purple-900 bg-opacity-30 rounded-xl p-6 text-center h-32 flex flex-col items-center justify-center">
+                        <i class="fas fa-star text-yellow-400 text-3xl mb-2"></i>
+                        <span class="font-medium">Premium Rewards</span>
+                    </div>
+                    <div class="bg-blue-900 bg-opacity-30 rounded-xl p-6 text-center h-32 flex flex-col items-center justify-center">
+                        <i class="fas fa-rocket text-blue-400 text-3xl mb-2"></i>
+                        <span class="font-medium">Fast Transactions</span>
+                    </div>
+                    <div class="bg-green-900 bg-opacity-30 rounded-xl p-6 text-center h-32 flex flex-col items-center justify-center">
+                        <i class="fas fa-gamepad text-green-400 text-3xl mb-2"></i>
+                        <span class="font-medium">Multiple Games</span>
+                    </div>
+                    <div class="bg-pink-900 bg-opacity-30 rounded-xl p-6 text-center h-32 flex flex-col items-center justify-center">
+                        <i class="fas fa-gem text-pink-400 text-3xl mb-2"></i>
+                        <span class="font-medium">Rare Assets</span>
+                    </div>
+                    <div class="bg-yellow-900 bg-opacity-30 rounded-xl p-6 text-center h-32 flex flex-col items-center justify-center">
+                        <i class="fas fa-bolt text-yellow-400 text-3xl mb-2"></i>
+                        <span class="font-medium">Instant Rewards</span>
+                    </div>
+                    <div class="bg-red-900 bg-opacity-30 rounded-xl p-6 text-center h-32 flex flex-col items-center justify-center">
+                        <i class="fas fa-trophy text-red-400 text-3xl mb-2"></i>
+                        <span class="font-medium">Tournaments</span>
+                    </div>
+                </div>
+                <div class="absolute -top-10 -right-10 w-32 h-32 bg-purple-500 rounded-full opacity-20 blur-xl"></div>
+                <div class="absolute bottom-10 -left-10 w-40 h-40 bg-blue-500 rounded-full opacity-20 blur-xl"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 px-6 bg-black bg-opacity-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">What is <span class="text-purple-400">Crypto Web3</span>?</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Crypto Web3 is revolutionizing the gaming industry by creating the first comprehensive Play-to-Earn ecosystem powered by blockchain technology and sustainable tokenomics.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 transition duration-300 card-hover">
+                    <div class="w-16 h-16 bg-purple-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-gamepad text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Gaming Revolution</h3>
+                    <p class="text-gray-300 mb-4">
+                        We're building the next generation of gaming where players truly own their in-game assets.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-purple-400 mr-2"></i>
+                            <span>True asset ownership</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-purple-400 mr-2"></i>
+                            <span>Cross-platform compatibility</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-purple-400 mr-2"></i>
+                            <span>Skill-based reward system</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 transition duration-300 card-hover">
+                    <div class="w-16 h-16 bg-blue-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fab fa-polygon text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Polygon Network</h3>
+                    <p class="text-gray-300 mb-4">
+                        Built on Polygon for lightning-fast transactions, ultra-low fees, and eco-friendly operations.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-blue-400 mr-2"></i>
+                            <span>Sub-second transaction finality</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-blue-400 mr-2"></i>
+                            <span>Minimal gas fees</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-blue-400 mr-2"></i>
+                            <span>99% energy reduction</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 transition duration-300 card-hover">
+                    <div class="w-16 h-16 bg-green-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-key text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">True Ownership</h3>
+                    <p class="text-gray-300 mb-4">
+                        Own your game assets, trade them freely, and build your digital wealth.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            <span>Tradeable assets</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            <span>Cross-game compatibility</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-green-400 mr-2"></i>
+                            <span>Real-world value</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 transition duration-300 card-hover">
+                    <div class="w-16 h-16 bg-yellow-600 rounded-xl flex items-center justify-center mb-6">
+                        <i class="fas fa-users text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Global Community</h3>
+                    <p class="text-gray-300 mb-4">
+                        Join a worldwide community of gamers, developers, and blockchain enthusiasts.
+                    </p>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-2"></i>
+                            <span>Community governance</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-2"></i>
+                            <span>Global tournaments</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-2"></i>
+                            <span>Developer ecosystem</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="py-16 px-6">
+        <div class="max-w-7xl mx-auto bg-black bg-opacity-30 rounded-2xl p-8 backdrop-filter backdrop-blur-lg">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-5xl font-bold mb-2 text-purple-400">10M+</div>
+                    <div class="text-gray-400">Total Supply</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold mb-2 text-blue-400">5+</div>
+                    <div class="text-gray-400">Launch Games</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold mb-2 text-green-400">50K+</div>
+                    <div class="text-gray-400">Active Players</div>
+                </div>
+                <div>
+                    <div class="text-5xl font-bold mb-2 text-yellow-400">0.01¢</div>
+                    <div class="text-gray-400">Avg. Transaction Fee</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Key <span class="text-purple-400">Features</span></h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Discover what makes Crypto Web3 the ultimate Play-to-Earn gaming platform
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 transition duration-300 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-purple-600 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-money-bill-wave text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Multiple Revenue Streams</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6">
+                        Diversify your earnings through various gameplay mechanics, tournaments, and staking rewards.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-400 mt-1 mr-3"></i>
+                            <span>Battle rewards and tournament prizes</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-400 mt-1 mr-3"></i>
+                            <span>Staking mining opportunities</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-purple-400 mt-1 mr-3"></i>
+                            <span>Referral and community bonuses</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 transition duration-300 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-bolt text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Instant Reward System</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6">
+                        Get rewarded immediately for your achievements with our lightning-fast Polygon-based reward distribution system.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-400 mt-1 mr-3"></i>
+                            <span>Real-time reward processing</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-400 mt-1 mr-3"></i>
+                            <span>Minimal transaction fees</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-400 mt-1 mr-3"></i>
+                            <span>Instant withdrawals available</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-blue-400 mt-1 mr-3"></i>
+                            <span>Transparent reward tracking</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 transition duration-300 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-green-600 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-trophy text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Skill-Based Earnings</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6">
+                        Your gaming skills directly translate to higher earnings through our merit-based reward system.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-400 mt-1 mr-3"></i>
+                            <span>Performance-based multipliers</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-400 mt-1 mr-3"></i>
+                            <span>Skill ranking rewards</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-400 mt-1 mr-3"></i>
+                            <span>Achievement milestone bonuses</span>
+                        </li>
+                        <li class="flex items-start">
+                            <i class="fas fa-check text-green-400 mt-1 mr-3"></i>
+                            <span>Leaderboard prize pools</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-gray-900 bg-opacity-50 rounded-xl p-8 transition duration-300 card-hover">
+                    <div class="flex items-center mb-6">
+                        <div class="w-14 h-14 bg-yellow-600 rounded-xl flex items-center justify-center mr-4">
+                            <i class="fas fa-gamepad text-2xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Ready to Start Earning?</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6">
+                        Join thousands of players who are already earning substantial rewards in the Crypto Web3 ecosystem.
+                    </p>
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-3 text-xl"></i>
+                            <span class="font-medium">No experience required</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-3 text-xl"></i>
+                            <span class="font-medium">Play anytime, anywhere</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check-circle text-yellow-400 mr-3 text-xl"></i>
+                            <span class="font-medium">Limitless earning potential</span>
+                        </div>
+                    </div>
+                    <a href="#" class="mt-6 inline-block bg-yellow-600 hover:bg-yellow-700 px-6 py-3 rounded-full font-medium transition">
+                        Start Your Journey Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics Section -->
+    <section id="tokenomics" class="py-20 px-6 bg-black bg-opacity-20">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Tokenomics</h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Transparent and sustainable token distribution designed for long-term ecosystem growth and community benefit.
+                </p>
+            </div>
+            
+            <div class="flex flex-col lg:flex-row items-center gap-12">
+                <div class="lg:w-1/2">
+                    <div class="tokenomics-chart mb-8 lg:mb-0">
+                        <div class="tokenomics-slice" style="transform: rotate(0deg);">
+                            <div class="absolute w-full h-full bg-purple-600 rounded-full clip-auto" style="transform: rotate(306deg);"></div>
+                        </div>
+                        <div class="tokenomics-slice" style="transform: rotate(306deg);">
+                            <div class="absolute w-full h-full bg-blue-600 rounded-full clip-auto" style="transform: rotate(54deg);"></div>
+                        </div>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="w-40 h-40 bg-gray-900 rounded-full flex items-center justify-center">
+                                <div class="text-center">
+                                    <div class="text-2xl font-bold">Crypto Web3</div>
+                                    <div class="text-sm text-gray-400">Token</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="lg:w-1/2">
+                    <h3 class="text-2xl font-bold mb-6">Crypto Web3 Token Distribution</h3>
+                    
+                    <div class="space-y-6">
+                        <!-- Liquidity Fund -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-purple-600 rounded-full mr-2"></div>
+                                    <span class="font-medium">Liquidity Fund</span>
+                                </div>
+                                <span class="font-bold">85%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-purple-600 h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                            <p class="text-gray-400 mt-2">
+                                Reserved for strategically used to provide liquidity to the VARS/ARS exchange pool.
+                            </p>
+                        </div>
+                        
+                        <!-- Developer Fund -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <div class="flex items-center">
+                                    <div class="w-4 h-4 bg-blue-600 rounded-full mr-2"></div>
+                                    <span class="font-medium">Developer Fund</span>
+                                </div>
+                                <span class="font-bold">15%</span>
+                            </div>
+                            <div class="w-full bg-gray-700 rounded-full h-2">
+                                <div class="bg-blue-600 h-2 rounded-full" style="width: 15%"></div>
+                            </div>
+                            <p class="text-gray-400 mt-2">
+                                Allocated for development, marketing, and operational expenses.
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-10 bg-gray-900 bg-opacity-50 rounded-xl p-6">
+                        <h4 class="text-xl font-bold mb-4">Why Polygon Network?</h4>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="flex items-start">
+                                <i class="fas fa-bolt text-blue-400 mr-3 mt-1"></i>
+                                <div>
+                                    <div class="font-bold">Lightning Fast</div>
+                                    <div class="text-sm text-gray-400">Sub-second transactions</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-coins text-blue-400 mr-3 mt-1"></i>
+                                <div>
+                                    <div class="font-bold">Ultra Low Fees</div>
+                                    <div class="text-sm text-gray-400">Under $0.01 per transaction</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-leaf text-blue-400 mr-3 mt-1"></i>
+                                <div>
+                                    <div class="font-bold">Eco-Friendly</div>
+                                    <div class="text-sm text-gray-400">99% less energy</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <i class="fas fa-shield-alt text-blue-400 mr-3 mt-1"></i>
+                                <div>
+                                    <div class="font-bold">Enterprise Security</div>
+                                    <div class="text-sm text-gray-400">Ethereum-level security</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Games Section -->
+    <section id="games" class="py-20 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Play-to-Earn <span class="text-purple-400">Games</span></h2>
+                <p class="text-xl text-gray-300 max-w-3xl mx-auto">
+                    Experience the future of gaming with our revolutionary Play-to-Earn titles that reward skill and dedication.
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Game 1 -->
+                <div class="bg-gray-900 bg-opacity-50 rounded-xl overflow-hidden transition duration-300 card-hover">
+                    <div class="h-48 bg-gradient-to-r from-purple-600 to-blue-600 flex items-center justify-center">
+                        <i class="fas fa-gamepad text-6xl opacity-30"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4">Battle Royale</h3>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-purple-400 mr-2 mt-1"></i>
+                                <span>Competitive matchmaking</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-purple-400 mr-2 mt-1"></i>
+                                <span>Daily Crypto Web3 rewards</span>
+                            </li>
+                        </ul>
+                        <div class="bg-gray-800 rounded-lg p-4">
+                            <div class="text-sm text-gray-400 mb-1">Rewards</div>
+                            <div class="text-xl font-bold text-purple-400">Up to 290 Crypto/day</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Game 2 -->
+                <div class="bg-gray-900 bg-opacity-50 rounded-xl overflow-hidden transition duration-300 card-hover">
+                    <div class="h-48 bg-gradient-to-r from-blue-600 to-green-600 flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-6xl opacity-30"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4">Tactical Shooter</h3>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-blue-400 mr-2 mt-1"></i>
+                                <span>Rank-based Rewards</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-blue-400 mr-2 mt-1"></i>
+                                <span>Riot ID Verification</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-star text-blue-400 mr-2 mt-1"></i>
+                                <span>Tracker.gg Stats Sync</span>
+                            </li>
+                        </ul>
+                        <div class="bg-gray-800 rounded-lg p-4">
+                            <div class="text-sm text-gray-400 mb-1">Rewards</div>
+                            <div class="text-xl font-bold text-blue-400">Up to 210 Crypto/day</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Coming Soon -->
+                <div class="bg-gray-900 bg-opacity-50 rounded-xl overflow-hidden transition duration-300 card-hover">
+                    <div class="h-48 bg-gradient-to-r from-green-600 to-yellow-600 flex items-center justify-center relative">
+                        <i class="fas fa-lock text-6xl opacity-30"></i>
+                        <div class="absolute inset-0 flex items-center justify-center bg-black bg-opacity-40">
+                            <span class="text-2xl font-bold">Coming Soon</span>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-4">Mystery Game</h3>
+                        <p class="text-gray-400 mb-6">
+                            We're working on exciting new games to expand our Play-to-Earn ecosystem.
+                        </p>
+                        <div class="bg-gray-800 rounded-lg p-4">
+                            <div class="text-sm text-gray-400 mb-1">Rewards</div>
+                            <div class="text-xl font-bold text-yellow-400">TBA</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-20 px-6 bg-gradient-to-r from-purple-900 to-blue-900">
+        <div class="max-w-4xl mx-auto text-center">
+            <h2 class="text-4xl font-bold mb-6">Ready to Transform Your Gaming Experience?</h2>
+            <p class="text-xl mb-8 opacity-90">
+                Join thousands of players earning real rewards while playing their favorite games. The future of gaming is here.
+            </p>
+            <a href="#" class="inline-block bg-white text-purple-900 hover:bg-gray-100 px-8 py-4 rounded-full font-bold text-lg transition">
+                Start Your Journey Now
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-30 py-12 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <div class="w-10 h-10 bg-purple-600 rounded-full flex items-center justify-center">
+                            <span class="font-bold text-xl">A</span>
+                        </div>
+                        <span class="text-xl font-bold">Crypto Web3</span>
+                    </div>
+                    <p class="text-gray-400">
+                        Revolutionizing the gaming industry with blockchain technology and sustainable tokenomics.
+                    </p>
+                    <div class="flex space-x-4 mt-6">
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-discord"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-telegram"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition">
+                            <i class="fab fa-medium"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Navigation</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#about" class="text-gray-400 hover:text-white transition">About</a></li>
+                        <li><a href="#features" class="text-gray-400 hover:text-white transition">Features</a></li>
+                        <li><a href="#games" class="text-gray-400 hover:text-white transition">Games</a></li>
+                        <li><a href="#tokenomics" class="text-gray-400 hover:text-white transition">Tokenomics</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Whitepaper</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Documentation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="text-lg font-bold mb-4">Stay Updated</h4>
+                    <p class="text-gray-400 mb-4">
+                        Subscribe to our newsletter for the latest updates and announcements.
+                    </p>
+                    <div class="flex">
+                        <input type="email" placeholder="Your email" class="bg-gray-800 text-white px-4 py-2 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-purple-600 w-full">
+                        <button class="bg-purple-600 hover:bg-purple-700 px-4 py-2 rounded-r-lg transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <div class="text-gray-500 text-sm mb-4 md:mb-0">
+                    &copy; 2023 Crypto Web3. All rights reserved.
+                </div>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-white transition text-sm">Terms of Service</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition text-sm">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-white transition text-sm">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Action Button -->
+    <div class="fixed bottom-6 right-6">
+        <a href="#" class="w-16 h-16 bg-purple-600 hover:bg-purple-700 rounded-full flex items-center justify-center text-white shadow-lg transition floating">
+            <i class="fas fa-gamepad text-2xl"></i>
+        </a>
+    </div>
+
+    <script>
+        // Simple animation for tokenomics chart
+        document.addEventListener('DOMContentLoaded', function() {
+            const slices = document.querySelectorAll('.tokenomics-slice');
+            let rotation = 0;
+            
+            slices.forEach((slice, index) => {
+                rotation += index * 120;
+                slice.style.transform = `rotate(${rotation}deg)`;
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
